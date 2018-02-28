@@ -49,8 +49,6 @@ public class RestWebService {
 	@Path("/{param}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteID(@PathParam("param") int id) {
-		Response response = new Response();
-		response.result="4";
-		return response;
+			return Database.delete(id);
 	}
 }

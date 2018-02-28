@@ -41,11 +41,11 @@ public class Database {
 	public static Response update(Request request) {
 		Response response = validateUpdateRequest(request);
 		if(!response.hasError) {
-			boolean insertOK = TableDataSave.insert(request);
-			if(insertOK) {
+			boolean updateOK = TableDataSave.update(request);
+			if(updateOK) {
 				response.setSuccess(request);
 			}else {
-				response.setError(ERROR_INSERT_FAIL);
+				response.setError(ERROR_UPDATE_FAIL);
 			}
 		}
 		return response;
@@ -99,15 +99,7 @@ public class Database {
 	private static Response validateUpdateRequest(Request request) {
 		Response response;
 		if(request.id > 0) {
-			response = validateInsertRequest(request);
-			if(!response.hasError) {
-				boolean updateOK = TableDataSave.update(request);
-				if(updateOK) {
-					response.setSuccess(request);
-				}else {
-					response.setError(ERROR_INSERT_FAIL);
-				}
-			}
+			response = validateInsertRequest(request);			
 		}else {
 			response = new Response();
 			response.setError(ERROR_INVALID_ID);
